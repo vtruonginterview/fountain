@@ -1,0 +1,54 @@
+<style>
+  table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+  }
+
+  td, th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+  }
+</style>
+
+<a href="/employer_job_postings"><< Back To Job Postings</a>
+
+<h1>Job Posting</h1>
+Title: <%= @job_posting.title %></br>
+Description: <%= @job_posting.description %></br>
+
+<h1>Applicants</h1>
+<% if @applications.length == 0 %>
+  No applicants for this job postings at this time.
+<% else %>
+  <table>
+    <tr>
+      <th>Applicants</th>
+      <th>Create Date</th>
+    </tr>
+    <% @applications.each do |application| %>
+      <tr>
+        <th>
+          <%= application.user.first_name + ' ' + application.user.last_name %>
+        </th>
+        <th>
+          <%= application.created_at %>
+        </th>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
+
+<span><h2>Logout</h2></span>
+<form action="/logout" method="post">
+  <input type="submit" value="Submit">
+</form>
+
+
+
+
+
+
+
+

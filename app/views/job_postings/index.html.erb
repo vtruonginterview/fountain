@@ -1,0 +1,56 @@
+<style>
+  table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+  }
+
+  td, th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+  }
+</style>
+
+<h1>Job Postings</h1>
+<% if @job_postings.length == 0 %>
+  No live job postings were found.
+<% else %>
+  <table>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Employer</th>
+      <th></th>
+    </tr>
+    <% @job_postings.each do |job_posting| %>
+      <tr>
+        <th>
+          <%= job_posting.title %>
+        </th>
+        <th>
+          <%= job_posting.description %>
+        </th>
+        <th>
+          <%= job_posting.employer.name %>
+        </th>
+        <th>
+          <% unless @job_applied_ids.include?(job_posting.id) %>
+            <form action=<%= "/applications/" + job_posting.id.to_s %> method="post">
+              <input type="submit" value="Apply">
+            </form>
+          <% else %>
+          <% end %>
+        </th>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
+
+<span><h2>Logout</h2></span>
+<form action="/logout" method="post">
+  <input type="submit" value="Submit">
+</form>
+
+
+

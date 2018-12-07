@@ -1,0 +1,55 @@
+<style>
+  table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+  }
+
+  td, th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+  }
+</style>
+
+<h1>Your Job Postings</h1>
+<% if @job_postings.length == 0 %>
+  No live job postings were found.
+<% else %>
+  <table>
+    <tr>
+      <th>Job Posting</th>
+      <th>Create Date</th>
+    </tr>
+    <% @job_postings.each do |job_posting| %>
+      <tr>
+        <th>
+          <a href=<%= "/employer_job_posting/" + job_posting.id.to_s %>><%= job_posting.title %></a>
+        </th>
+        <th>
+          <%= job_posting.created_at %>
+        </th>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
+
+<h2>Create a new job posting</h2>
+<form action="/job_postings" method="post">
+  Title:  <input type="text" name="title" placeholder="driver"> <br/>
+  Description:  <br/><textarea name="description" cols="40" rows="2" placeholder="zoom zoom zoom"></textarea> <br/>
+  <input type="submit" value="Submit">
+</form>
+
+<span><h2>Logout</h2></span>
+<form action="/logout" method="post">
+  <input type="submit" value="Submit">
+</form>
+
+
+
+
+
+
+
+
